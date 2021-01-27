@@ -1,24 +1,22 @@
-import logo from './logo.svg';
+import { Router } from "@reach/router";
+import Login from "./pages/Login";
+import Callback from "./pages/Callback";
+import Featured from "./pages/Featured";
 import './App.css';
+import TokenContext from "./TokenContext";
+import { useState } from "react";
 
 function App() {
+  var tokenState = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TokenContext.Provider value={tokenState}>
+      <Router>
+        <Login default />
+        <Callback path="/callback" />
+        <Featured path="/featured" />
+      </Router>
+    </TokenContext.Provider>
   );
 }
 
